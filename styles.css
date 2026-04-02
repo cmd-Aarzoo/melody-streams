@@ -1,0 +1,528 @@
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Masonry grid */
+.masonry-grid {
+    column-count: 1;
+    column-gap: 2rem;
+}
+
+@media (min-width: 640px) {
+    .masonry-grid {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 1024px) {
+    .masonry-grid {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 1536px) {
+    .masonry-grid {
+        column-count: 3;
+    }
+}
+
+.masonry-item {
+    break-inside: avoid;
+    margin-bottom: 2rem;
+}
+
+/* Category Tabs */
+.tab-btn {
+    background-color: #f0f2f4;
+    color: #111418;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.25s ease;
+}
+
+.dark .tab-btn {
+    background-color: #1f2937;
+    color: white;
+}
+
+.tab-btn:hover {
+    background-color: rgba(43, 140, 238, 0.12);
+    color: #2b8cee;
+}
+
+.active-tab {
+    background-color: #2b8cee !important;
+    color: white !important;
+}
+
+/* Cursor Glow */
+#cursor-blob {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgb(3, 51, 240), transparent 60%);
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+    transform: translate(-50%, -50%);
+    transition: transform 0.06s linear;
+    z-index: -1;
+    will-change: transform;
+}
+
+.dark #cursor-blob {
+    background: radial-gradient(circle, rgb(255, 255, 255), transparent 60%);
+}
+
+/* Loader */
+.music-loader {
+    display: flex;
+    gap: 6px;
+    height: 20px;
+    align-items: flex-end;
+}
+
+.music-loader span {
+    width: 4px;
+    height: 5px;
+    background: #2b8cee;
+    animation: bounce 0.9s infinite ease-in-out alternate;
+    border-radius: 4px;
+}
+
+.music-loader span:nth-child(2) { animation-delay: 0.1s; }
+.music-loader span:nth-child(3) { animation-delay: 0.2s; }
+.music-loader span:nth-child(4) { animation-delay: 0.3s; }
+.music-loader span:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+    from { height: 4px; opacity: 0.5; }
+    to { height: 20px; opacity: 1; }
+}
+
+/* Header Animation */
+.header-animate {
+    animation: headerFadeSlide 0.6s ease-out forwards;
+}
+
+@keyframes headerFadeSlide {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.header-scrolled {
+    backdrop-filter: blur(14px);
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.dark .header-scrolled {
+    background-color: rgba(17, 20, 24, 0.7);
+}
+
+/* Logo Hover */
+.logo-hover {
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+    transform-origin: center;
+}
+
+.logo-hover:hover {
+    transform: scale(1.12) !important;
+    opacity: 0.92;
+}
+
+/* Tab Bar */
+header .tab-btn {
+    transition: transform 0.22s ease-out, background-color 0.25s ease,
+                color 0.25s ease, box-shadow 0.22s ease-out;
+}
+
+#mainHeader:hover {
+    backdrop-filter: blur(18px) brightness(1.04);
+    transition: backdrop-filter 0.4s ease;
+}
+
+#tabBar {
+    transition: transform 0.35s ease, opacity 0.3s ease;
+}
+
+#tabBar.hide-tabs {
+    transform: translateY(-40px);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Header shrink */
+#mainHeader {
+    transition: height 0.35s ease, padding 0.35s ease;
+    position: relative;
+    z-index: 999;
+}
+
+#mainHeader.shrink-header {
+    height: 60px;
+    padding-bottom: 0;
+}
+
+/* ===== THEME TOGGLE BUTTON ===== */
+.theme-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    transition: all 0.25s ease;
+}
+
+.dark .theme-btn {
+    background: #1f2937;
+}
+
+.theme-btn span {
+    font-size: 24px;
+    color: #111418;
+}
+
+.dark .theme-btn span {
+    color: white;
+}
+
+.theme-btn:hover {
+    background: #eef5ff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(43,140,238,0.25);
+}
+
+.dark .theme-btn:hover {
+    background: #24324a;
+}
+
+/* ========================================================= */
+/* =============== FINAL FIXED PROFILE SYSTEM =============== */
+/* ========================================================= */
+
+.profile-wrapper {
+    position: relative;
+    z-index: 10000 !important;
+}
+
+/* Avatar Button */
+.profile-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    transition: all 0.25s ease;
+}
+
+.dark .profile-btn {
+    background: #1f2937;
+}
+
+.profile-btn span {
+    font-size: 28px;
+    color: #111418;
+}
+
+.dark .profile-btn span {
+    color: #ffffff;
+}
+
+.profile-btn:hover {
+    background: #eef5ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(43,140,238,0.25);
+}
+
+.dark .profile-btn:hover {
+    background: #24324a;
+}
+
+/* Profile Card */
+.profile-card {
+    position: absolute;
+    top: 55px;
+    right: 0;
+    min-width: 240px;
+    background: white;
+    border-radius: 14px;
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.20);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 9999 !important;
+}
+
+.dark .profile-card {
+    background: #111827;
+    border: 1px solid #374151;
+}
+
+/* Show on hover */
+.profile-card.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* Text Inside Card */
+.profile-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #111418;
+}
+
+.dark .profile-name {
+    color: white;
+}
+
+.profile-email {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 2px;
+}
+
+.dark .profile-email {
+    color: #9ca3af;
+}
+
+.profile-card hr {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 12px 0;
+}
+
+.dark .profile-card hr {
+    border-top: 1px solid #374151;
+}
+
+/* Logout Button */
+.logout-btn {
+    display: block;
+    width: 100%;
+    background: #ef4444;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: #dc2626;
+}
+
+/* Fix inline span baseline bug */
+.profile-btn span {
+    display: block !important;
+    line-height: 1 !important;
+}
+
+.profile-btn {
+    line-height: 0 !important;
+}
+
+header,
+#mainHeader,
+#mainHeader > div,
+.profile-wrapper,
+.profile-card {
+    overflow: visible !important;
+}
+
+#cursor-blob {
+    pointer-events: none !important;
+}
+
+/* ========================================================= */
+/* ========== YOUTUBE-STYLE HEADER ICON BUTTONS ============= */
+/* ========================================================= */
+
+.yt-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    transition: background 0.25s ease, transform 0.15s ease;
+}
+
+.dark .yt-btn {
+    background: #1f2937;
+}
+
+.yt-btn span {
+    font-size: 24px;
+    color: #111418;
+}
+
+.dark .yt-btn span {
+    color: white;
+}
+
+.yt-btn:hover {
+    background: #eef5ff;
+    transform: translateY(-2px);
+}
+
+.dark .yt-btn:hover {
+    background: #24324a;
+}
+
+.yt-btn:active {
+    transform: scale(0.9);
+}
+
+/* Make player feel like YouTube theater mode */
+#playerView {
+    position: fixed;
+    top: 64px;            /* 👈 below header */
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+}
+
+#playerView > div {
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 24px; /* spacing from header */
+}
+
+.dark #playerView {
+    background-color: #111418;
+}
+
+/* Player full width like YouTube */
+.player-container {
+    width: 100%;
+    max-width: 1100px;   /* desktop size */
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+/* Maintain proper video ratio */
+.player-container iframe {
+    width: 100%;
+    height: 60vh;       /* BIG height */
+    min-height: 320px;  /* mobile friendly */
+    border-radius: 16px;
+}
+
+/* Floating Buttons */
+.floating-buttons {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 999;
+}
+
+.float-btn {
+    width: 48px;
+    height: 48px;
+    background: white;
+    border-radius: 50%;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #4b5563;
+    cursor: pointer;
+    transition: 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.float-btn:hover {
+    background: #f3f4f6;
+}
+
+/* Purple variant for AI button */
+.float-btn.purple {
+    color: #6d28d9;
+}
+
+/* AI Box */
+.ai-box {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 300px;
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    display: none;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    animation: pop 0.3s ease;
+    z-index: 999;
+}
+
+@keyframes pop {
+    from {transform: scale(0.9); opacity: 0;}
+    to {transform: scale(1); opacity: 1;}
+}
+
+.ai-title {
+    margin-bottom: 6px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.ai-sub {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.ai-input {
+    width: 100%;
+    height: 70px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: 8px;
+    margin-top: 10px;
+}
+
+.ai-detect {
+    margin-top: 10px;
+    width: 100%;
+    background: #6d28d9;
+    padding: 8px;
+    border-radius: 8px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.ai-result {
+    margin-top: 12px;
+    font-weight: 600;
+}

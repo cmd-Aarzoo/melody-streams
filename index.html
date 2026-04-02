@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Discovery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Parallax Background -->
+    <div class="parallax-bg"></div>
+        <!-- TOP LEFT LOGO -->
+    <div class="login-page-logo">
+        <span class="material-symbols-outlined">music_note</span>
+        <span class="logo-text">MelodyStream</span>
+    </div>
+
+
+
+    <div class="auth-wrapper" id="authWrapper">
+        <div class="auth-form-box register-form-box">
+<form onsubmit="handleSignup(event)">
+                <h1>Create Account</h1>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Google"><i class="fab fa-google"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <span>or use your email for registration</span>
+                <input type="text" placeholder="Full Name" required />
+                <input type="email" placeholder="Email Address" required />
+                <input type="password" placeholder="Password" required />
+                <p id="signupError" class="form-error"></p>
+		<p id="signupSuccess" class="form-success"></p>
+                <button type="submit">Sign Up</button>
+                <div class="mobile-switch">
+                    <p>Already have an account?</p>
+<button type="button" id="mobileLoginBtn">Sign In</button>
+                </div>
+            </form>
+        </div>
+        <div class="auth-form-box login-form-box">
+<form onsubmit="handleLogin(event)">
+                <h1>Sign In</h1>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Google"><i class="fab fa-google"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <span>or use your account</span>
+                <input type="email" placeholder="Email Address" required />
+                <input type="password" placeholder="Password" required />
+                <a href="#">Forgot your password?</a>
+                <p id="loginError" class="form-error"></p>
+                <button type="submit">Sign In</button>
+                <div class="mobile-switch">
+                    <p>Don't have an account?</p>
+<button type="button" id="mobileRegisterBtn">Sign Up</button>
+                </div>
+            </form>
+        </div>
+        <div class="slide-panel-wrapper">
+            <div class="slide-panel">
+                <div class="panel-content panel-content-left">
+                    <h1>Welcome Back!</h1>
+                    <p>Stay connected by logging in with your credentials and continue your experience</p>
+<button type="button" class="transparent-btn" id="loginBtn">Sign In</button>
+                </div>
+                <div class="panel-content panel-content-right">
+                    <h1>Hey There!</h1>
+                    <p>Begin your amazing journey by creating an account with us today</p>
+<button type="button" class="transparent-btn" id="registerBtn">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const registerBtn = document.getElementById('registerBtn');
+        const loginBtn = document.getElementById('loginBtn');
+        const mobileRegisterBtn = document.getElementById('mobileRegisterBtn');
+        const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+        const authWrapper = document.getElementById('authWrapper');
+
+        if (registerBtn) {
+            registerBtn.addEventListener('click', () => {
+                authWrapper.classList.add("panel-active");
+            });
+        }
+
+        if (loginBtn) {
+            loginBtn.addEventListener('click', () => {
+                authWrapper.classList.remove("panel-active");
+            });
+        }
+
+        if (mobileRegisterBtn) {
+            mobileRegisterBtn.addEventListener('click', () => {
+                authWrapper.classList.add("panel-active");
+            });
+        }
+
+        if (mobileLoginBtn) {
+            mobileLoginBtn.addEventListener('click', () => {
+                authWrapper.classList.remove("panel-active");
+            });
+        }
+    </script>
+
+
+<script>
+// ------------------- SIGN UP FUNCTION -------------------
+function handleSignup(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const name = form.querySelector("input[placeholder='Full Name']").value;
+    const email = form.querySelector("input[placeholder='Email Address']").value;
+    const password = form.querySelector("input[placeholder='Password']").value;
+
+    const errorBox = document.getElementById("signupError");
+    const successBox = document.getElementById("signupSuccess");
+
+    errorBox.style.display = "none";
+    successBox.style.display = "none";
+
+    const fd = new FormData();
+    fd.append("name", name);
+    fd.append("email", email);
+    fd.append("password", password);
+
+    fetch("signup.php", {
+        method: "POST",
+        body: fd
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if (data.status === "error") {
+            errorBox.innerText = data.message;
+            errorBox.style.display = "block";
+            return;
+        }
+
+        successBox.innerText = data.message;
+        successBox.style.display = "block";
+
+        setTimeout(() => {
+            document.getElementById("authWrapper").classList.remove("panel-active");
+            form.reset();
+            successBox.style.display = "none";
+        }, 1500);
+
+    })
+    .catch(() => {
+        errorBox.innerText = "Something went wrong. Try again.";
+        errorBox.style.display = "block";
+    });
+}
+
+
+
+
+// ===================== LOGIN FUNCTION =====================
+function handleSignup(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const name = form.querySelector("input[type='text']").value;
+    const email = form.querySelector("input[type='email']").value;
+    const password = form.querySelector("input[type='password']").value;
+
+    const errorBox = document.getElementById("signupError");
+    const successBox = document.getElementById("signupSuccess");
+
+    errorBox.style.display = "none";
+    successBox.style.display = "none";
+
+    const fd = new FormData();
+    fd.append("name", name);
+    fd.append("email", email);
+    fd.append("password", password);
+
+    fetch("signup.php", {
+        method: "POST",
+        body: fd
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if (data.status === "error") {
+            errorBox.innerText = data.message;
+            errorBox.style.display = "block";
+            return;
+        }
+
+        successBox.innerText = data.message;
+        successBox.style.display = "block";
+
+        setTimeout(() => {
+            document.getElementById("authWrapper").classList.remove("panel-active");
+            form.reset();
+            successBox.style.display = "none";
+        }, 1500);
+
+    })
+    .catch(() => {
+        errorBox.innerText = "Something went wrong. Try again.";
+        errorBox.style.display = "block";
+    });
+}
+
+
+// ---------------- LOGIN FUNCTION ----------------
+function handleLogin(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const email = form.querySelector("input[type='email']").value;
+    const password = form.querySelector("input[type='password']").value;
+
+    const errorBox = document.getElementById("loginError");
+    errorBox.style.display = "none";
+
+    const fd = new FormData();
+    fd.append("email", email);
+    fd.append("password", password);
+
+    fetch("login.php", {
+        method: "POST",
+        body: fd
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if (data.status === "success") {
+            window.location.href = "../index.php";
+        } else {
+            errorBox.innerText = data.message;
+            errorBox.style.display = "block";
+        }
+    })
+    .catch(() => {
+        errorBox.innerText = "Unable to login. Try again.";
+        errorBox.style.display = "block";
+    });
+}
+</script>
+
+
+
+<script>
+const bg = document.querySelector(".parallax-bg");
+
+document.addEventListener("mousemove", (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 30;
+    const y = (e.clientY / window.innerHeight - 0.5) * 30;
+
+    bg.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+});
+</script>
+
+</body>
+
+</html>
+
+
+
+
+
+
